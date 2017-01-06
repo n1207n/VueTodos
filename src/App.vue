@@ -7,12 +7,12 @@
 <script>
 import { mapMutations } from 'vuex';
 
-import todo from './components/Todo.vue';
+import todo from './components/Todo';
 
 const filters = {
   all: todos => todos,
-  active: todos => todos.filter((item) => !item.done),
-  completed: todos => todos.filter((item) => item.done),
+  active: todos => todos.filter(item => !item.done),
+  completed: todos => todos.filter(item => item.done),
 };
 
 export default {
@@ -20,22 +20,42 @@ export default {
   components: {
     todo,
   },
-  data () {
-    visibility: 'all',
-    filters: filters,
+  data() {
+    return {
+      visibility: 'all',
+      filters,
+    };
   },
   computed: {
-    todos () {
+    todos() {
       return this.$store.state.todos;
     },
-    checkAllTodos () {
-      return this.todos.every(todo => todo.done);
+    checkAllTodos() {
+      return this.todos.every(item => item.done);
     },
-    filterTodos () {
+    filterTodos() {
       return filters[this.visibility](this.todos);
     },
-    remaining () {
-      return this.todos.filter(todo => !todo.done).length;
+    remaining() {
+      return this.todos.filter(item => !item.done).length;
+    },
+  },
+  methods: {
+    // App component now has access to injected appStore instance's mutation methods
+    ...mapMutations([
+      'toggleAllTodos',
+      'clearDoneTodos',
+    ]),
+    addTodo(e) {
+      const targetEvent = e;
+      var text = targetEvent.target.value;
+
+      if (text.trim()) {
+        // Add a new todo to Vuex store
+        this.$store.commit('addTodo', { text });
+      }
+
+      targetEvent.target.event = '';
     },
   },
 };
