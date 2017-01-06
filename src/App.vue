@@ -1,7 +1,34 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-  </div>
+  <section id="app">
+    <header>
+      <h1>Todos</h1>
+
+      <input type="text" class="new-todo" autofocus autocomplete="off" placeholder="What do you need to do?" @keyup.enter="addTodo" />
+    </header>
+
+    <section class="todo-list-container" v-show="todos.length">
+      <input type="checkbox" class="toggle-all" :checked="checkAllTodos" @change="toggleAll({ done: !allChecked })" />
+
+      <ul class="todo-list">
+        <todo v-for="todo in filterTodos" :todo="todo"></todo>
+      </ul>
+    </section>
+
+    <footer v-show="todos.length">
+      <span class="todo-count">
+        <strong>{{ remaining }}</strong>
+        {{ remaining | pluralize('item') }} left
+      </span>
+
+      <ul class="filters">
+        <li v-for="(val, key) in filters">
+          <a :href="'#/' + key" :class="{ selected: visibility === key }" @click="visibility = key">{{ key | capitalize }}</a>
+        </li>
+      </ul>
+
+      <button type="button" class="clear-completed" v-show="todos.length > remaining" @click="clearDoneTodos">Clear done todos</button>
+    </footer>
+  </section>
 </template>
 
 <script>
@@ -67,13 +94,10 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
