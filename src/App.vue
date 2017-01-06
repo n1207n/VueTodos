@@ -6,12 +6,14 @@
           <header>
             <h1 class="md-display-1">Todos</h1>
 
-            <input type="text" class="new-todo" autofocus autocomplete="off" placeholder="What do you need to do?" @keyup.enter="addTodo" />
+            <md-input-container>
+              <md-input type="text" class="new-todo" autofocus autocomplete="off" placeholder="What do you need to do?" @keyup.native.enter="addTodo" />
+            </md-input-container>
           </header>
 
           <section class="todo-list-container" v-show="todos.length">
             <div class="select-all-container">
-              <label>Select all </label><input type="checkbox" class="toggle-all" :checked="checkAllTodos" @change="toggleAll({ done: !allChecked })" />
+              <label class="md-title">Select all </label><md-checkbox class="toggle-all" v-model="allChecked" @change="toggleAllTodos({ done: !allChecked })" />
             </div>
 
             <ul class="todo-list">
@@ -58,6 +60,7 @@ export default {
   data() {
     return {
       visibility: 'all',
+      allChecked: false,
       filters,
     };
   },
