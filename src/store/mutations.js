@@ -1,4 +1,4 @@
-export const mutations = {
+export default {
   addTodo(state, { text }) {
     state.todos.push({
       text,
@@ -7,7 +7,8 @@ export const mutations = {
   },
 
   editTodo(state, { todo, value }) {
-    todo.text = value;
+    const todoToEdit = todo;
+    todoToEdit.text = value;
   },
 
   deleteTodo(state, { todo }) {
@@ -15,16 +16,18 @@ export const mutations = {
   },
 
   toggleTodo(state, { todo }) {
-    todo.done = !todo.done;
+    const todoToDelete = todo;
+    todoToDelete.done = !todo.done;
   },
 
   toggleAllTodos(state, { done }) {
-    state.todos.forEach((todo) => {
+    state.todos.forEach((item) => {
+      const todo = item;
       todo.done = done;
     });
   },
 
   clearDoneTodos(state) {
-    state.todos.filter((todo) => !todo.done);
+    state.todos.filter(todo => !todo.done);
   },
 };

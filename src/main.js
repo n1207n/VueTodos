@@ -6,6 +6,7 @@ import 'vue-material/dist/vue-material.css';
 import VueForm from 'vue-form';
 import VueResource from 'vue-resource';
 
+import appStore from './store';
 import App from './App';
 
 Vue.use(VueMaterial);
@@ -27,6 +28,7 @@ Vue.material.setCurrentTheme('teal');
 
 /* eslint-disable no-new */
 new Vue({
+  appStore,
   el: '#app',
   template: '<App/>',
   components: { App },
