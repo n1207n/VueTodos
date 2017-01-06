@@ -24,6 +24,20 @@ export default {
     visibility: 'all',
     filters: filters,
   },
+  computed: {
+    todos () {
+      return this.$store.state.todos;
+    },
+    checkAllTodos () {
+      return this.todos.every(todo => todo.done);
+    },
+    filterTodos () {
+      return filters[this.visibility](this.todos);
+    },
+    remaining () {
+      return this.todos.filter(todo => !todo.done).length;
+    },
+  },
 };
 </script>
 
