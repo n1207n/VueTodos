@@ -4,7 +4,7 @@
       <input type="checkbox" :checked="todo.done" @change="toggleTodo({ todo: todo })"/>
 
       <label v-text="todo.text" @dblclick="editing = true"></label>
-      <button type="button" class="destroy" @click="deleteTodo({ todo: todo })"></button>
+      <button type="button" class="destroy" @click="deleteTodo({ todo: todo })">X</button>
     </div>
 
     <input type="text" class="edit" v-show="editing" v-focus="editing" :value="todo.text" @keyup.enter="doneEdit" @keyup.esc="cancelEdit" @blur="doneEdit" />

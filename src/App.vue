@@ -1,34 +1,42 @@
 <template>
-  <section id="app">
-    <header>
-      <h1>Todos</h1>
+  <div id="app">
+    <md-layout md-gutter>
+      <md-layout md-gutter md-flex-xsmall="100" md-flex-small="33" md-flex-medium="33" class="main-conatiner">
+        <md-whiteframe md-tag="section" class="todo-app-container">
+          <header>
+            <h1 class="md-display-1">Todos</h1>
 
-      <input type="text" class="new-todo" autofocus autocomplete="off" placeholder="What do you need to do?" @keyup.enter="addTodo" />
-    </header>
+            <input type="text" class="new-todo" autofocus autocomplete="off" placeholder="What do you need to do?" @keyup.enter="addTodo" />
+          </header>
 
-    <section class="todo-list-container" v-show="todos.length">
-      <input type="checkbox" class="toggle-all" :checked="checkAllTodos" @change="toggleAll({ done: !allChecked })" />
+          <section class="todo-list-container" v-show="todos.length">
+            <div class="select-all-container">
+              <label>Select all </label><input type="checkbox" class="toggle-all" :checked="checkAllTodos" @change="toggleAll({ done: !allChecked })" />
+            </div>
 
-      <ul class="todo-list">
-        <todo v-for="todo in filterTodos" :todo="todo"></todo>
-      </ul>
-    </section>
+            <ul class="todo-list">
+              <todo v-for="todo in filterTodos" :todo="todo"></todo>
+            </ul>
+          </section>
 
-    <footer v-show="todos.length">
-      <span class="todo-count">
-        <strong>{{ remaining }}</strong>
-        {{ remaining | pluralize('item') }} left
-      </span>
+          <footer v-show="todos.length">
+            <span class="todo-count">
+              <strong>{{ remaining }}</strong>
+              {{ remaining | pluralize('item') }} left
+            </span>
 
-      <ul class="filters">
-        <li v-for="(val, key) in filters">
-          <a :href="'#/' + key" :class="{ selected: visibility === key }" @click="visibility = key">{{ key | capitalize }}</a>
-        </li>
-      </ul>
+            <ul class="filters">
+              <li v-for="(val, key) in filters">
+                <a :href="'#/' + key" :class="{ selected: visibility === key }" @click="visibility = key">{{ key | capitalize }}</a>
+              </li>
+            </ul>
 
-      <button type="button" class="clear-completed" v-show="todos.length > remaining" @click="clearDoneTodos">Clear done todos</button>
-    </footer>
-  </section>
+            <button type="button" class="clear-completed" v-show="todos.length > remaining" @click="clearDoneTodos">Clear done todos</button>
+          </footer>
+        </md-whiteframe>
+      </md-layout>
+    </md-layout>
+  </div>
 </template>
 
 <script>
@@ -96,8 +104,42 @@ export default {
 
 <style lang="scss">
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+div.md-layout {
+  justify-content: center;
+}
+
+.todo-app-container {
+  margin: 16px;
+  padding: 16px;
+  text-align: center;
+
+  @media(min-width: 320px) {
+    width: 240px;
+  }
+
+  @media(min-width: 601px) {
+    width: 320px;
+  }
+
+  @media(min-width: 961px) {
+    width: 480px;
+  }
+}
+
+.select-all-container {
+  margin: 8px;
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
 }
 </style>
