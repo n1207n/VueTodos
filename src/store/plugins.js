@@ -1,4 +1,4 @@
-import { LOCALSTORAGE_KEY } from './store';
+import { LOCALSTORAGE_KEY } from './state';
 
 const localStoragePlugin = (store) => {
   store.subscribe((mutation, { todos }) => {
