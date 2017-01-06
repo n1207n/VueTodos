@@ -48,7 +48,7 @@ export default {
     ]),
     addTodo(e) {
       const targetEvent = e;
-      var text = targetEvent.target.value;
+      const text = targetEvent.target.value;
 
       if (text.trim()) {
         // Add a new todo to Vuex store
@@ -57,6 +57,12 @@ export default {
 
       targetEvent.target.event = '';
     },
+  },
+  filters: {
+    pluralize: function pluralize(itemCount, word) {
+      return itemCount === 1 ? word : `${word}s`;
+    },
+    capitalize: string => string.charAt(0).toUpperCase() + string.slice(1),
   },
 };
 </script>
