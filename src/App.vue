@@ -93,7 +93,7 @@ export default {
         this.$store.commit('addTodo', { text });
       }
 
-      targetEvent.target.event = '';
+      targetEvent.target.value = '';
     },
   },
   filters: {
