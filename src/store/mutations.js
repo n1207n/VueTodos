@@ -28,6 +28,7 @@ export default {
   },
 
   clearDoneTodos(state) {
-    state.todos.filter(todo => !todo.done);
+    const newState = state;
+    newState.todos = state.todos.filter(todo => !todo.done);
   },
 };

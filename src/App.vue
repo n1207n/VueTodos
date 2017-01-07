@@ -33,7 +33,7 @@
               </li>
             </ul>
 
-            <button type="button" class="clear-completed" v-show="todos.length > remaining" @click="clearDoneTodos">Clear done todos</button>
+            <md-button type="button" class="clear-completed md-primary" v-show="todos.length > remaining" @click="clearDoneTodos">Clear done todos</md-button>
           </footer>
         </md-whiteframe>
       </md-layout>

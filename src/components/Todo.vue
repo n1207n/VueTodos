@@ -1,10 +1,10 @@
 <template>
   <li class="todo" :class="{ completed: todo.done, editing: editing }">
     <div class="view">
-      <input type="checkbox" :checked="todo.done" @change="toggleTodo({ todo: todo })"/>
+      <md-checkbox v-model="todo.done" @change="toggleTodo({ todo: todo })"/>
 
-      <label v-text="todo.text" @dblclick="editing = true"></label>
-      <button type="button" class="destroy" @click="deleteTodo({ todo: todo })">X</button>
+      <label class="md-headline" v-text="todo.text" @dblclick="editing = true"></label>
+      <md-button class="md-raised md-warn" @click="deleteTodo({ todo: todo })">X</md-button>
     </div>
 
     <input type="text" class="edit" v-show="editing" v-focus="editing" :value="todo.text" @keyup.enter="doneEdit" @keyup.esc="cancelEdit" @blur="doneEdit" />
@@ -94,4 +94,7 @@
 </script>
 
 <style lang="scss" scoped>
+  button.md-button {
+    min-width: 32px;
+  }
 </style>
