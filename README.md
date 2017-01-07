@@ -2,6 +2,12 @@
 
 > A TodoMVC example by Vue.js
 
+![](./demo.png)
+
+## Dependencies
+* VueMaterial
+* Vuex
+
 ## Build Setup
 
 ``` bash
