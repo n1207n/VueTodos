@@ -82,7 +82,6 @@ export default {
     // App component now has access to injected appStore instance's mutation methods
     ...mapMutations([
       'toggleAllTodos',
-      'clearDoneTodos',
     ]),
     addTodo(e) {
       const targetEvent = e;
@@ -94,6 +93,10 @@ export default {
       }
 
       targetEvent.target.value = '';
+    },
+    clearDoneTodos() {
+      this.$store.commit('clearDoneTodos');
+      this.allChecked = false;
     },
   },
   filters: {
